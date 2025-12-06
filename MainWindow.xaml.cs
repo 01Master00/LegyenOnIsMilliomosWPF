@@ -28,26 +28,32 @@ namespace LegyenOnIsMilliomosWPF
         Random rand = new Random();
         MediaPlayer sus = new MediaPlayer();
         MediaPlayer good = new MediaPlayer();
+        int Count = 0;
+        bool QuestionOn = true;
+        List<Question> questions = new List<Question>();
 
         public MainWindow()
         {
             InitializeComponent();
+            Button1.Name = "GoodButton";
+            Button2.Name = "GoodButton";
+            Button3.Name = "GoodButton";
+            Button4.Name = "GoodButton";
 
-
+            LoadQuestions("cigány vagy");
         }
 
 
-        private async Task MoneyLadder(int ind)
+        private async Task MoneyLadder()
         {
             Ladder.Visibility = Visibility.Visible;
-            TextBlock textBlock = (TextBlock)FindName("ML" + ind.ToString());
+            TextBlock textBlock = (TextBlock)FindName("ML" + (Count+1).ToString());
             Brush Back = textBlock.Background;
             Brush Fore = textBlock.Foreground;
-            MessageBox.Show(textBlock.Name);
 
-            if (ind > 1)
+            if (Count > 1)
             {
-                TextBlock textBlock2 = (TextBlock)FindName("ML" + (ind - 1).ToString());
+                TextBlock textBlock2 = (TextBlock)FindName("ML" + (Count).ToString());
                 textBlock2.Background = Brushes.Green;
                 textBlock2.Foreground = Back;
             }
@@ -55,28 +61,67 @@ namespace LegyenOnIsMilliomosWPF
             {
                 if (i %2== 0)
                 {
-                    textBlock.Background = Brushes.Gold;
-                    textBlock.Foreground = Brushes.Black;
-                }
-                else
-                {
                     textBlock.Background = Back;
                     textBlock.Foreground = Fore;
                 }
+                else
+                {
+                    textBlock.Background = Brushes.Gold;
+                    textBlock.Foreground = Brushes.Black;
+                }
                 await Task.Delay(500);
             }
-            Progression();
             Ladder.Visibility = Visibility.Hidden;
+            Progression();
 
+        }
+
+        private void LoadQuestions(string filePath)
+        {
+            try
+            {
+                var lines = File.ReadAllLines(filePath);
+                foreach (var line in lines)
+                {
+                    var parts = line.Split(';');
+                    if (parts.Length == 6)
+                    {
+                        var question = new Question(parts[0], new List<string> { parts[1], parts[2], parts[3], parts[4] }, int.Parse(parts[5]));
+
+                        questions.Add(question);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading questions: {ex.Message}");
+            }
         }
 
         private void Progression()
         {
-            //kérdés és válaszok betöltése
+            Count++;
+            FieldClear();
+
+
+
+
+
+
+
+            QuestionOn = true;
         }
 
-        private void BtnReset()
+        private void FieldClear()
         {
+            //a fájhoz képest változhat
+            Button1.Content = "A: ";
+            Button2.Content = "B: ";
+            Button3.Content = "C: ";
+            Button4.Content = "D: ";
+
+            
+
             Button1.Background = Brushes.DarkBlue;
             Button1.Name = "Button1";
             Button2.Background = Brushes.DarkBlue;
@@ -85,21 +130,35 @@ namespace LegyenOnIsMilliomosWPF
             Button3.Name = "Button3";
             Button4.Background = Brushes.DarkBlue;
             Button4.Name = "Button4";
+            TextBlock t = (TextBlock)FindName("ML" + Count.ToString());
+            ScoreTB.Text = $"{Count}/15 kérdés {t.Text}-ért";
+            QuestionTB.Text = "A következő kérdés:";
+
+
         }
+
 
 
         private void Buttons_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            
-            Anim(btn);
+            if (Count == 0)
+            {
+                QuestionOn = false;
+                MoneyLadder();
+            }
+            else if (QuestionOn)
+            {
+                QuestionOn = false;
+                Button btn = sender as Button;
+                btn.Background = Brushes.Yellow;
+                btn.Foreground = Brushes.Black;
+                Anim(btn);
+            }
 
-            //ha nyer
 
         }
 
 
-        //animáció készítése
         private async Task Anim(Button aws)
         {
 
@@ -112,7 +171,19 @@ namespace LegyenOnIsMilliomosWPF
 
             if (aws.Name == "GoodButton")
             {
-                MessageBox.Show("Good Boi");
+                aws.Background = Brushes.Green;
+                good.Open(new Uri("C:\\Users\\berki\\source\\repos\\LegyenOnIsMilliomosWPF\\SFX\\Good.mp3"));
+                Light1.Fill = Brushes.LightGreen;
+                Light2.Fill = Brushes.LightGreen;
+                good.Play();
+                await Task.Delay(5000);
+
+                Light1.Visibility = Visibility.Hidden;
+                Light2.Visibility = Visibility.Hidden;
+                Light1.Fill = Brushes.Yellow;
+                Light2.Fill = Brushes.Yellow;
+                aws.Foreground = Brushes.White;
+                MoneyLadder();
             }
             else
             {
@@ -131,18 +202,35 @@ namespace LegyenOnIsMilliomosWPF
                         btn.Background = Brushes.Green;
                     }
                 }
-
                 aws.Background = Brushes.Red;
                 
                 await Task.Delay(2000);
-                MessageBox.Show("Sajnálatos módon vesztettél (Womp Womp)\n");
-                MoneyLadder(1);
-                //App.Current.Shutdown();
+                MessageBox.Show("Sajnálatos módon vesztettél\n");
+                MoneyLadderL();
             }
 
-            Light1.Visibility = Visibility.Hidden;
-            Light2.Visibility = Visibility.Hidden;
 
         }
+
+        private async Task MoneyLadderL()
+        {
+            Ladder.Visibility = Visibility.Visible;
+            for (int i=1; i<16;i++)
+            {
+                TextBlock t = (TextBlock)FindName("ML" + i.ToString());
+                if (i % 2 == 0)
+                {
+                    t.Background = Brushes.Red;
+                }
+                else
+                {
+                    t.Background = Brushes.DarkRed;
+                }
+                await Task.Delay(300);
+            }
+            MessageBox.Show("Womp Womp");
+            App.Current.Shutdown();
+        }
+
     }
 }
