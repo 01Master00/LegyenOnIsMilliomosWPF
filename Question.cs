@@ -8,19 +8,25 @@ namespace LegyenOnIsMilliomosWPF
 {
     internal class Question
     {
+        private int questionNumber;
         private string questionText;
         private List<string> answers;
-        private int correctAnswerIndex;
-        public Question(string questionText, List<string> answers, int correctAnswerIndex)
+        private string solution;
+        private string category;
+        public Question(int q, string questionText, List<string> answers, string correctAnswerIndex,string cat)
         {
             this.questionText = questionText;
             this.answers = answers;
-            this.correctAnswerIndex = correctAnswerIndex;
+            this.solution = correctAnswerIndex;
+            this.questionNumber = q;
+            this.category = cat;
         }
         
         public string QuestionText { get { return questionText; } }
         public List<string> Answers { get { return answers; } }
-        public int CorrectAnswerIndex { get { return correctAnswerIndex; } }
+        public string Solution { get { return solution; } }
+        public int QuestionNumber { get { return questionNumber; } }
+        public string Category { get { return category; } }
 
 
 

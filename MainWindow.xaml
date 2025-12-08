@@ -6,76 +6,114 @@
         xmlns:local="clr-namespace:LegyenOnIsMilliomosWPF"
         mc:Ignorable="d"
         Background="Blue"
-        Title="MainWindow" Height="500" Width="800">
+        Title="MainWindow"
+        WindowState="Maximized"
+        WindowStyle="None"
+        ResizeMode="NoResize">
 
-    <Canvas x:Name="kanva">
-        <TextBlock Text="0/15 kérdés 0Ft-ért" x:Name="ScoreTB" Canvas.Left="170" Padding="5" FontSize="20" Canvas.Top="18" Background="DarkOrange" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBlock Text="Legyen Ön Is NagyonGazdag!!!" x:Name="QuestionTB" Foreground="White" Background="DarkBlue" FontSize="35" TextAlignment="Center" Canvas.Left="60" Canvas.Top="55" HorizontalAlignment="Center" VerticalAlignment="Top" Height="140" Width="700"/>
+    <Viewbox Stretch="Uniform">
+        <Canvas x:Name="kanva" Width="1920" Height="1080">
+            <TextBlock Text="0/15 kérdés 0 Ft-ért" x:Name="ScoreTB" Canvas.Left="340" Padding="10" FontSize="40" Canvas.Top="36" Background="DarkOrange"/>
+            <TextBlock Text="Kategória: " x:Name="CategoryTB" Canvas.Left="1132" Padding="10" FontSize="40" Canvas.Top="37" Background="DarkOrange"/>
+            <TextBlock TextWrapping="Wrap" Text="Legyen Ön Is NagyonGazdag!!!" x:Name="QuestionTB" Foreground="White" Background="DarkBlue" FontSize="70" TextAlignment="Center" Canvas.Left="120" Canvas.Top="110" Height="336" Width="1680"/>
 
-        <Button x:Name="Button1" Content="A: Készen Állsz?" HorizontalContentAlignment="Left" Padding="10" Width="300" Height="70" Background="DarkBlue" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="60" Canvas.Top="209" Click="Buttons_Click"/>
-        <Button x:Name="Button2" Content="B: Vajon Túléled??" HorizontalContentAlignment="Left" Padding="10" Width="300" Height="70" Background="DarkBlue" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="460" Canvas.Top="209" Click="Buttons_Click"/>
-        <Button x:Name="Button3" Content="C: Bírni Fogod?" HorizontalContentAlignment="Left" Padding="10" Width="300" Height="70" Background="DarkBlue" Foreground="White" Canvas.Left="60" Canvas.Top="301" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Buttons_Click"/>
-        <Button x:Name="Button4" Content="D: El tudsz jutni a végére??" HorizontalContentAlignment="Left" Padding="10" Width="300" Height="70" Background="DarkBlue" Foreground="White" Canvas.Left="460" Canvas.Top="301" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Buttons_Click"/>
+            <Button FontSize="40" x:Name="Button1" Content="A: Készen Állsz?" Padding="20" Width="800" Height="200" Background="DarkBlue" Foreground="White" Canvas.Left="120" Canvas.Top="580" Click="Buttons_Click" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="130"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button FontSize="40" x:Name="Button2" Content="B: Vajon Túléled??" Padding="20" Width="800" Height="200" Background="DarkBlue" Foreground="White" Canvas.Left="1011" Canvas.Top="580" Click="Buttons_Click" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="130"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button FontSize="40" x:Name="Button3" Content="C: Bírni Fogod?" Padding="20" Width="800" Height="200" Background="DarkBlue" Foreground="White" Canvas.Left="120" Canvas.Top="850" Click="Buttons_Click" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="130"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button FontSize="40" x:Name="Button4" Content="D: El tudsz jutni a végére??" Padding="20" Width="800" Height="200" Background="DarkBlue" Foreground="White" Canvas.Left="1011" Canvas.Top="850" Click="Buttons_Click" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="130"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <StackPanel x:Name="Ladder" Background="Purple" Width="1800" Height="950" Canvas.Left="50" Canvas.Top="20" Visibility="Collapsed">
+                <TextBlock TextAlignment="Center" Height="60" Width="1500" FontSize="50"  x:Name="ML15" Text="15: 500000000 Ft" Background="blue" Foreground="Gold" Margin="0,10,0,0"/>
+                <TextBlock TextAlignment="Center" Height="60" Width="1400" FontSize="50" x:Name="ML14" Text="14: 200000000 Ft" Background="DarkBlue" Foreground="White"/>
+                <TextBlock TextAlignment="Center" Height="60" Width="1300" FontSize="50"  x:Name="ML13" Text="13: 90000000 Ft" Background="DarkBlue" Foreground="White"/>
+                <TextBlock TextAlignment="Center"  Height="60" Width="1200" FontSize="50"  x:Name="ML12" Text="12: 40000000 Ft" Background="DarkBlue" Foreground="White"/>
+                <TextBlock TextAlignment="Center"  Height="60" Width="1100" FontSize="50"  x:Name="ML11" Text="11: 11000000 Ft" Background="DarkBlue" Foreground="White"/>
+                <TextBlock TextAlignment="Center"  Height="60" Width="1000" FontSize="50"  x:Name="ML10" Text="10: 4000000 Ft" Background="Blue" Foreground="Gold"/>
+                <TextBlock TextAlignment="Center"  Height="60" Width="900" FontSize="50"  x:Name="ML9" Text="9: 1000000 Ft" Background="DarkBlue" Foreground="White"/>
+                <TextBlock TextAlignment="Center"  Height="60" Width="800" FontSize="50"  x:Name="ML8" Text="8: 500000 Ft" Background="DarkBlue" Foreground="White"/>
+                <TextBlock TextAlignment="Center"  Height="60" Width="700" FontSize="50"  x:Name="ML7" Text="7: 100000 Ft" Background="DarkBlue" Foreground="White"/>
+                <TextBlock TextAlignment="Center"  Height="60" Width="600" FontSize="50"  x:Name="ML6" Text="6: 10000 Ft" Background="DarkBlue" Foreground="White"/>
+                <TextBlock TextAlignment="Center"  Height="60" Width="500" FontSize="50"  x:Name="ML5" Text="5: 1000 Ft" Background="Blue" Foreground="Gold"/>
+                <TextBlock TextAlignment="Center"  Height="60" Width="450" FontSize="50"  x:Name="ML4" Text="4: 100 Ft" Background="DarkBlue" Foreground="White"/>
+                <TextBlock TextAlignment="Center"  Height="60" Width="400" FontSize="50"  x:Name="ML3" Text="3: 50 Ft" Background="DarkBlue" Foreground="White"/>
+                <TextBlock TextAlignment="Center"  Height="60" Width="350" FontSize="50"  x:Name="ML2" Text="2: 10 Ft" Background="DarkBlue" Foreground="White"/>
+                <TextBlock TextAlignment="Center"  Height="60" Width="250" FontSize="50"  x:Name="ML1" Text="1: 5 Ft" Background="DarkBlue" Foreground="White" Margin="0,0,0,10"/>
 
 
-        <StackPanel x:Name="Ladder" Background="Purple" Width="700" Height="420" Canvas.Left="50" Canvas.Top="10" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Collapsed">
-            <TextBlock TextAlignment="Center" Width="340" FontSize="20"  x:Name="ML15" Text="15: 500000000 Ft" Background="blue" Foreground="Gold" Margin="0,10,0,0"/>
-            <TextBlock TextAlignment="Center" Width="300" FontSize="20" x:Name="ML14" Text="14: 200000000 Ft" Background="DarkBlue" Foreground="White"/>
-            <TextBlock TextAlignment="Center" Width="260" FontSize="20" x:Name="ML13" Text="13: 90000000 Ft" Background="DarkBlue" Foreground="White"/>
-            <TextBlock TextAlignment="Center" Width="240" FontSize="20" x:Name="ML12" Text="12: 40000000 Ft" Background="DarkBlue" Foreground="White"/>
-            <TextBlock TextAlignment="Center" Width="220" FontSize="20" x:Name="ML11" Text="11: 11000000 Ft" Background="DarkBlue" Foreground="White"/>
-            <TextBlock TextAlignment="Center" Width="200" FontSize="20" x:Name="ML10" Text="10: 4000000 Ft" Background="Blue" Foreground="Gold"/>
-            <TextBlock TextAlignment="Center" Width="180" FontSize="20" x:Name="ML9" Text="9: 1000000 Ft" Background="DarkBlue" Foreground="White"/>
-            <TextBlock TextAlignment="Center" Width="160" FontSize="20" x:Name="ML8" Text="8: 500000 Ft" Background="DarkBlue" Foreground="White"/>
-            <TextBlock TextAlignment="Center" Width="140" FontSize="20" x:Name="ML7" Text="7: 100000 Ft" Background="DarkBlue" Foreground="White"/>
-            <TextBlock TextAlignment="Center" Width="130" FontSize="20" x:Name="ML6" Text="6: 10000 Ft" Background="DarkBlue" Foreground="White"/>
-            <TextBlock TextAlignment="Center" Width="120" FontSize="20" x:Name="ML5" Text="5: 1000 Ft" Background="Blue" Foreground="Gold"/>
-            <TextBlock TextAlignment="Center" Width="110" FontSize="20" x:Name="ML4" Text="4: 100 Ft" Background="DarkBlue" Foreground="White"/>
-            <TextBlock TextAlignment="Center" Width="100" FontSize="20" x:Name="ML3" Text="3: 50 Ft" Background="DarkBlue" Foreground="White"/>
-            <TextBlock TextAlignment="Center" Width="90" FontSize="20" x:Name="ML2" Text="2: 10 Ft" Background="DarkBlue" Foreground="White"/>
-            <TextBlock TextAlignment="Center" Width="80" FontSize="20" x:Name="ML1" Text="1: 5 Ft" Background="DarkBlue" Foreground="White" Margin="0,0,0,10"/>
+            </StackPanel>
 
 
-        </StackPanel>
-
-        <Rectangle Visibility="Collapsed" x:Name="Light1" Fill="Yellow" Width="100" Height="1500" Opacity=".7" Canvas.Left="150" Canvas.Top="-800" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Rectangle.RenderTransform>
-                <RotateTransform x:Name="L1Rotation" Angle="0.45"/>
-            </Rectangle.RenderTransform>
-            <Rectangle.Triggers>
-                <EventTrigger RoutedEvent="Loaded">
-                    <BeginStoryboard>
-                        <Storyboard RepeatBehavior="Forever" AutoReverse="True">
-                            <DoubleAnimation
-                    Storyboard.TargetName="L1Rotation"
+            <Rectangle Visibility="Collapsed" x:Name="Light1" Fill="Yellow" Width="200" Height="3000" Opacity=".7" Canvas.Left="300" Canvas.Top="-1600" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform x:Name="LightRot2" Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+                <Rectangle.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                                <DoubleAnimation
+                    Storyboard.TargetName="LightRot2"
                     Storyboard.TargetProperty="Angle"
-                    From="-45" To="30"
+                    From="30" To="-40"
                     Duration="0:0:1"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Rectangle.Triggers>
-        </Rectangle>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Rectangle.Triggers>
+            </Rectangle>
 
-        <Rectangle Visibility="Collapsed" x:Name="Light2" Fill="Yellow" Width="100" Height="1500" Opacity=".7" Canvas.Left="550" Canvas.Top="-800" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Rectangle.RenderTransform>
-                <RotateTransform x:Name="L2Rotation" Angle="0.011"/>
-            </Rectangle.RenderTransform>
-            <Rectangle.Triggers>
-                <EventTrigger RoutedEvent="Loaded">
-                    <BeginStoryboard>
-                        <Storyboard RepeatBehavior="Forever" AutoReverse="True">
-                            <DoubleAnimation
-                    Storyboard.TargetName="L2Rotation"
+            <Rectangle Visibility="Collapsed" x:Name="Light2" Fill="Yellow" Width="200" Height="3000" Opacity=".7" Canvas.Left="1420" Canvas.Top="-1600" RenderTransformOrigin="0.5,0.5">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform x:Name="LightRot1" Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+                <Rectangle.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                                <DoubleAnimation
+                    Storyboard.TargetName="LightRot1"
                     Storyboard.TargetProperty="Angle"
-                    From="45" To="-30"
+                    From="-30" To="40"
                     Duration="0:0:1"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Rectangle.Triggers>
-        </Rectangle>
-
-
-    </Canvas>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Rectangle.Triggers>
+            </Rectangle>
+        </Canvas>
+    </Viewbox>
 </Window>
